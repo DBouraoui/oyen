@@ -1,0 +1,8 @@
+apscheduler
+requests
+fastapi[standard]
+uvicorn[standard]
+sqlalchemy
+databases
+pydantic
+httpx
