@@ -39,7 +39,6 @@ pipe = pipeline(
 def ask_report_to_oyen(json_data, max_tokens=150):
     """
     Génère un rapport Markdown en français à partir d'un JSON de stats serveur.
-
     json_data: dict
     max_tokens: int, longueur max du rapport
     """
@@ -55,7 +54,7 @@ def ask_report_to_oyen(json_data, max_tokens=150):
         4. One or two improvement recommendations with the title: ### Recommandations
     - Always maintain the same section titles and structure, even if some values are missing.
     - Use French language, concise and clear.
-    - Keep the report short, max ~150-200 tokens.
+    - Keep the report short, max ~250-300 tokens.
 
     <|user|>
     Here is the JSON data:
@@ -67,7 +66,7 @@ def ask_report_to_oyen(json_data, max_tokens=150):
         chat_prompt,
         max_new_tokens=max_tokens,
         return_full_text=False,
-        temperature=0.0,
+        temperature=0.3,
         use_cache=False,
         do_sample=False,
     )
