@@ -10,6 +10,7 @@ from database import create_db_and_tables
 # Router
 from urls.routes import router as pings_router
 from url_scheduler.routes import router as schedule_router
+from reporting.routes import router as oyen_ai_router
 
 
 @asynccontextmanager
@@ -21,6 +22,7 @@ app = FastAPI(lifespan=lifespan, title="Oyen API", description="Oyen API for dev
 
 app.include_router(pings_router,prefix="/api/v1/url", tags=["Urls"])
 app.include_router(schedule_router,prefix="/api/v1/url-schedule", tags=["Urls Scheduler"])
+app.include_router(oyen_ai_router, prefix="/api/v1/reporting", tags=["Reporting"])
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),

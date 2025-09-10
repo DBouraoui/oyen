@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-09-10T12:00:00Z",
+  "ping": {
+    "ok": 20,
+    "ko": 10,
+    "average_ms": 120.5,
+    "min_ms": 80,
+    "max_ms": 300,
+    "failed_urls": [
+      {"url": "https://example.com", "error": "Timeout"},
+      {"url": "https://test.com", "error": "DNS error"}
+    ]
+  },
+  "system": {
+    "cpu": {
+      "usage_percent": "70%",
+      "cores": 8,
+      "frequency_mhz": 3200
+    },
+    "memory": {
+      "total_gb": 16,
+      "used_percent": "67%",
+      "free_gb": 5.3
+    },
+    "ram_mid": "70%",
+    "storage": {
+      "total_gb": 512,
+      "used_percent": "20%",
+      "free_gb": 410
+    }
+  },
+  "network": {
+    "latency_ms": 120,
+    "packet_loss_percent": 0,
+    "download_speed_mbps": 120,
+    "upload_speed_mbps": 50,
+    "interfaces": [
+      {"name": "eth0", "ip": "192.168.1.10", "status": "up"},
+      {"name": "wlan0", "ip": "192.168.1.11", "status": "down"}
+    ]
+  },
+  "applications": [
+    {"name": "FastAPI app", "status": "running", "uptime_seconds": 3600},
+    {"name": "Database", "status": "running", "connections": 12}
+  ],
+  "alerts": [
+    {"type": "cpu", "message": "CPU usage above 80%", "level": "warning"},
+    {"type": "storage", "message": "Storage below 20%", "level": "critical"}
+  ]
+}

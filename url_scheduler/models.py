@@ -6,7 +6,7 @@ from database import Base
 from urls.models import Url
 
 class PingResponse(Base):
-    __tablename__ = "pingResponse"
+    __tablename__ = "ping_response"
 
     id = Column(Integer, primary_key=True)
     url = Column(ForeignKey(Url.id), nullable=False)

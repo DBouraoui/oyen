@@ -11,6 +11,7 @@ from database import get_async_session
 from users.models import User
 from database import async_session_maker
 
+
 router = APIRouter()
 scheduler = AsyncIOScheduler()
 load_dotenv()
@@ -20,9 +21,10 @@ async def scheduled_ping():
         service = SchedulerService(db)
         await service.ping_urls()
 
+
 @router.on_event("startup")
 async def on_startup():
-    interval = int(os.getenv("SCHEDULER_INTERVAL",60))
+    interval = int(os.getenv("PING_INTERVAL_SCHEDULER",60))
     scheduler.add_job(scheduled_ping, 'interval', seconds=interval, id="scheduled_ping")
     scheduler.start()
 

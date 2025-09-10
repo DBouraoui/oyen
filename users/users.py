@@ -17,7 +17,7 @@ from database import get_user_db
 
 load_dotenv()
 
-SECRET = os.getenv("SECRET", "secret")
+SECRET = os.getenv("JWT_SECRET", "secret")
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):

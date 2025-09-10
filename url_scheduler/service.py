@@ -58,7 +58,7 @@ class SchedulerService:
                     ping_response_model = PingResponse(
                         url=str(url),
                         response=ping_result,
-                        created_at=datetime.datetime.utcnow()
+                        created_at=datetime.datetime.now(datetime.timezone.utc),
                     )
 
                     self.db.add(ping_response_model)
