@@ -1,5 +1,6 @@
+pyip
 apscheduler
-requests
+fastapi-users[sqlalchemy]
 fastapi[standard]
 uvicorn[standard]
 sqlalchemy
