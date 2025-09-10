@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from fastapi_users.db import SQLAlchemyUserDatabase
 from users.models import Base, User
@@ -5,7 +8,9 @@ from users.models import Base, User
 from fastapi import Depends
 from typing import AsyncGenerator
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+load_dotenv()
+
+DATABASE_URL =  os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./test.db")
 
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)

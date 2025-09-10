@@ -1,6 +1,11 @@
 import json
+import os
+
 import torch
+from dotenv import load_dotenv
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, logging
+
+load_dotenv()
 
 # --- Supprimer les warnings ---
 logging.set_verbosity_error()
@@ -36,7 +41,7 @@ pipe = pipeline(
 )
 
 # --- FONCTION DE RAPPORT ---
-def ask_report_to_oyen(json_data, max_tokens=150):
+def ask_report_to_oyen(json_data):
     """
     Génère un rapport Markdown en français à partir d'un JSON de stats serveur.
     json_data: dict
@@ -62,11 +67,13 @@ def ask_report_to_oyen(json_data, max_tokens=150):
     <|end|>
     <|assistant|>"""
 
+    max_tokens = int(os.environ.get("MAX_TOKENS", 200))
+    temperature = float(os.environ.get("TEMPERATURE", 0.5))
     output = pipe(
         chat_prompt,
         max_new_tokens=max_tokens,
         return_full_text=False,
-        temperature=0.3,
+        temperature=temperature,
         use_cache=False,
         do_sample=False,
     )

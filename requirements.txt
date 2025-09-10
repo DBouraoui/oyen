@@ -14,3 +14,4 @@ transformers
 accelerate
 pydantic_extra_types
 pendulum
+python-dotenv
