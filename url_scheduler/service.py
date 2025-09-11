@@ -31,7 +31,7 @@ class SchedulerService:
         urls_model = result.scalars().all()
 
         if not urls_model:
-            raise HTTPException(status_code=404, detail="No scheduled URL found")
+            raise HTTPException(status_code=400, detail="No scheduled URL")
 
         responses = []
 
