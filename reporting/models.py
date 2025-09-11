@@ -5,8 +5,14 @@ from database import Base
 from sqlalchemy.dialects.mysql import JSON
 
 class ServerReporting(Base):
-    __tablename__ = 'server_reporting'
+    __tablename__ = 'server_status'
 
+    id = Column(INTEGER, primary_key=True)
+    response = Column(JSON, nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.now())
+
+class JsonReporting(Base):
+    __tablename__ = 'json_global_reporting'
     id = Column(INTEGER, primary_key=True)
     response = Column(JSON, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.now())

@@ -27,7 +27,7 @@ except Exception as e:
     raise
 
 
-def ask_report_to_oyen(chat_prompt: str, ) -> str:
+async def ask_report_to_oyen(chat_prompt: str ) -> str:
     """
     Génère un rapport d'analyse serveur à partir de données JSON
     Version corrigée avec gestion des clés manquantes
@@ -39,17 +39,21 @@ def ask_report_to_oyen(chat_prompt: str, ) -> str:
         str: Rapport généré au format Markdown
     """
 
-
     inputs = tokenizer(chat_prompt, return_tensors="pt").to(device)
 
     with torch.no_grad():
         outputs = model.generate(
             inputs.input_ids,
-            max_length=512,
-            max_new_tokens=300,
+            max_length=2048,
+            max_new_tokens=700,  # Réduit pour plus de vitesse
             do_sample=False,
-            temperature=0.5,
-            num_beams=2
+            temperature=0.2,  # Réduit pour plus de cohérence
+            num_beams=4,  # Conservé pour un bon compromis qualité/vitesse
+            early_stopping=True,  # Ajouté pour arrêter la génération lorsque c'est possible
+            length_penalty=0.6,  # Pénalité pour éviter des phrases trop longues
+            no_repeat_ngram_size=3,  # Évite les répétitions
+            repetition_penalty=1.2,  # Pénalité pour les répétitions
+            min_length = 700
         )
 
     if device == "mps":

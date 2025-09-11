@@ -1,3 +1,5 @@
+reportlab
+markdown2
 psutil
 pyip
 apscheduler
