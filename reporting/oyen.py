@@ -44,7 +44,7 @@ async def ask_report_to_oyen(chat_prompt: str ) -> str:
     with torch.no_grad():
         outputs = model.generate(
             inputs.input_ids,
-            max_length=2048,
+            max_length=4096,
             max_new_tokens=700,  # Réduit pour plus de vitesse
             do_sample=False,
             temperature=0.2,  # Réduit pour plus de cohérence
@@ -53,7 +53,7 @@ async def ask_report_to_oyen(chat_prompt: str ) -> str:
             length_penalty=0.6,  # Pénalité pour éviter des phrases trop longues
             no_repeat_ngram_size=3,  # Évite les répétitions
             repetition_penalty=1.2,  # Pénalité pour les répétitions
-            min_length = 700
+            min_length = 500
         )
 
     if device == "mps":

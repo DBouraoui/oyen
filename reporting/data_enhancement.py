@@ -9,6 +9,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from sqlalchemy.ext.asyncio import AsyncSession
 from reporting.models import ServerReporting
 from url_scheduler.models import PingResponse
+from .models import JsonReporting
 from sqlalchemy.future import select
 
 from .ai_externe import gpt_call
@@ -287,6 +288,7 @@ async def gpt_reporting_average(database: AsyncSession):
     3. Use proper Markdown formatting including code blocks
     4. Maintain consistent number formatting (decimal places)
     6. Do not add any additional text outside the markdown code block
+    7. The reporting need absolutly to be in french
 
     Replace all placeholders with actual values and maintain perfect formatting:
 
@@ -347,6 +349,14 @@ async def gpt_reporting_average(database: AsyncSession):
         result = await gpt_call(prompt)
 
         clean_result = clean_markdown_output(result)
+
+        json_model = JsonReporting(
+            response=clean_result
+        )
+
+        database.add(json_model)
+        await database.commit()
+        await database.refresh(json_model)
 
         result_pdf = markdown_to_pdf_no_pandoc(clean_result,"system_report.pdf")
 
